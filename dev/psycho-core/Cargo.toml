@@ -1,0 +1,23 @@
+[package]
+name = "kirin_web_psycho_core"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-only"
+publish = false
+
+[workspace]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+test = false
+doctest = false
+
+[dependencies]
+rustfft = "=6.4.1"
+rubato = { version = "=2.0.0", features = ["fft_resampler"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+

@@ -1,0 +1,59 @@
+/* HP layout/accessibility adapter. Material, rings, typography and response are OS definitions. */
+@font-face { font-family: Inter; src: url('/fonts/inter-latin-wght-400-600.woff2') format('woff2'); font-weight: 400 600; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('/fonts/jetbrains-mono-latin-wght-400-600.woff2') format('woff2'); font-weight: 400 600; font-display: swap; }
+[data-kirin-stone="true"] {
+  position: relative; isolation: isolate;
+  --font-display: Waldenburg, Georgia, serif;
+  --font-body: Inter, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  --ink: var(--ink-primary); --body: var(--ink-body); --gold: var(--stone-gold-ink); --line: var(--hairline);
+  --plate-shadow: var(--stone-plate); --button-shadow: var(--stone-lift); --pressed-shadow: var(--stone-press);
+  font-family: var(--font-body);
+}
+.desk, .desk[data-input-state="ready"] { display: block; }
+.drop-area { padding: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.drop-area > .desk-head { margin-bottom: 18px; }
+.drop-basin { height: clamp(380px, 51vw, 610px); margin-top: 0; }
+/* hidden creates a focus-scroll container when huge, brand-centred grooves extend beyond it.
+   clip retains the same visible boundary without internally scrolling the input text out of view. */
+[data-kirin-stone="true"] [data-stone-basin], [data-kirin-stone="true"] [data-stone-basin] > #basin-touch { overflow: clip; }
+[data-kirin-stone="true"] [data-stone-basin] > #basin-touch { padding-bottom: 112px !important; min-width: 0; font-family: var(--font-body); }
+[data-stone-basin] > #basin-touch:focus-visible { outline-offset: -8px; }
+[data-drop-brand] { white-space: nowrap; }
+[data-drop-text] { word-break: keep-all; overflow-wrap: anywhere; }
+[data-drop-choose-files] { min-height: 44px; height: 44px !important; }
+.input-actions { margin-top: 28px; }
+.limits, .status { max-width: 780px; }
+.read-area { margin-top: 42px; background: linear-gradient(var(--la), var(--stone-lit), var(--stone) 52%); box-shadow: var(--stone-plate); }
+.desk[data-input-state="idle"] .read-area { display: none; }
+.music-card, .draft-section { background: linear-gradient(var(--la), var(--stone-lit), var(--stone) 52%); }
+.metrics > div { background: linear-gradient(var(--la), var(--stone-deep), var(--stone) 64%); box-shadow: var(--stone-well); }
+[data-kirin-stone="true"] .work-observation { --wave-left: #e9cb93; --wave-right: #7fcbd4; --wave-cursor: #f1e9da; color: #f1e9da; }
+.plot { background: transparent; }
+.instrument-window { margin-bottom: 24px; padding: 26px; border-radius: 20px; }
+.instrument-pair { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; }
+.instrument-pair > div { min-width: 0; max-width: 100%; }
+.instrument-window [data-kirin-vu-meters] { flex-wrap: wrap; max-width: 100%; }
+.eye-reading { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
+.instrument-window .instrument-label { font: 500 10px/1.5 var(--font-mono); letter-spacing: .16em; color: var(--obs-gold); margin: 0 0 12px; }
+.instrument-window p { margin: 8px 0; font-size: 14px; }
+.instrument-window span:not([data-kirin-eye-frame], [data-kirin-vu-meter], [data-kirin-vu-meters]) { font-size: 11px; }
+.instrument-window .eye-reading > div > span, .instrument-window .vu-reading > span { color: #b4bbca; line-height: 1.8; }
+.instrument-window [data-kirin-eye-frame] { flex-shrink: 0; }
+.instrument-window button[data-kirin-eye-frame] { box-shadow: none !important; }
+.instrument-window [data-kirin-vu-pair] { margin-bottom: 18px; }
+.instrument-window [data-kirin-vu-sensitivity-mark] { min-height: 18px; min-width: 18px; }
+.intro .eyebrow, .gold-dot, .stone-mark, .path-tag { color: var(--stone-gold-ink); }
+@media (max-width: 660px) {
+  .drop-basin { height: 430px; }
+  [data-kirin-stone="true"] [data-stone-basin] > #basin-touch { padding: 24px 14px 112px !important; }
+  .read-area { padding: 22px; }
+  .instrument-window { padding: 20px 14px; }
+  .instrument-pair { gap: 26px; }
+  .eye-reading { gap: 16px; }
+  [data-drop-text] { font-size: 18px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-kirin-stone="true"] *, [data-kirin-stone="true"] *::before, [data-kirin-stone="true"] *::after { animation: none !important; transition: none !important; }
+  [data-kirin-glint] { display: none; }
+}

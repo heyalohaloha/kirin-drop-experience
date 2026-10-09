@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "sourceCommit": "716a3a0be91703ba3aee945089514c173d5f28b1",
+  "approvedBy": "Daisuke",
+  "approvedOn": "2026-10-09",
+  "scope": "presentation-only",
+  "measurementEngineIncluded": false,
+  "engineModelsIncluded": false,
+  "integration": "OS is the source of truth; HP consumes pinned presentation assets. OS refactor not performed.",
+  "sources": [
+    {
+      "path": "src/styles/normalStone.css",
+      "sha256": "416dc5c2287d9db5a5dfa569c3a91793709fbc6ba081db9602b48e20966b7d7b"
+    },
+    {
+      "path": "src/styles/kirinPlay.css",
+      "sha256": "182be6e8dff90b813e53207d40750579d80cfe20d5e771ebfd4d2340fb1feb93"
+    },
+    {
+      "path": "src/styles/kirinInstruments.css",
+      "sha256": "c4a440481357029f0922c3895292db535dc389b66be0d70483f9732d188334e5"
+    },
+    {
+      "path": "src/components/common/dropRipple.js",
+      "sha256": "4c884b29c6e7684a04a89c246ba30251e4dcb05a8d2f404d15071dff5c760b21"
+    },
+    {
+      "path": "src/components/biophilic/stoneLight.js",
+      "sha256": "5dd90f63bd7fa5b506cd3af578bfc2d25d9543751c97bf5af152ecefeb9a05bb"
+    },
+    {
+      "path": "src/screens/DropScreen.jsx",
+      "sha256": "84d37ec3b77c19a2a11a574df65f9039942c37f39671e3b8530be3c0791a9635"
+    },
+    {
+      "path": "src/hooks/useStonePointerPlay.js",
+      "sha256": "2ea9aaeebee63e4b1276570d92d05655475ff104e8156c80ddf3317db171d677"
+    }
+  ],
+  "files": [
+    {
+      "path": "normalStone.css",
+      "sha256": "416dc5c2287d9db5a5dfa569c3a91793709fbc6ba081db9602b48e20966b7d7b",
+      "bytes": 25135
+    },
+    {
+      "path": "dropRipple.mjs",
+      "sha256": "4c884b29c6e7684a04a89c246ba30251e4dcb05a8d2f404d15071dff5c760b21",
+      "bytes": 2449
+    },
+    {
+      "path": "stoneLight.mjs",
+      "sha256": "5dd90f63bd7fa5b506cd3af578bfc2d25d9543751c97bf5af152ecefeb9a05bb",
+      "bytes": 11925
+    },
+    {
+      "path": "stonePointer.mjs",
+      "sha256": "8a1a8fc370a439cb056d6c41c402c00c76aa5d1144e026c15ee2ebd593737730",
+      "bytes": 4734
+    },
+    {
+      "path": "dropStyles.mjs",
+      "sha256": "41fa959231b9e3352bf4a6671b0198f1ad0509ce9242cf83b7a87c76acfde822",
+      "bytes": 2947
+    },
+    {
+      "path": "dropMotion.css",
+      "sha256": "cc38b4b6dc74a0dd9ed1ee5fc3a8794e26b1137d5447284666dfbc989fb2b17a",
+      "bytes": 3758
+    },
+    {
+      "path": "dropPlay.css",
+      "sha256": "d646148becd715fdc1cb6d8936d6599371bf8a1d4cb38b6d7281f4d07056fa9b",
+      "bytes": 5335
+    }
+  ],
+  "adaptations": [
+    "Drop literal style objects extracted without executable JSX",
+    "React effect wrapper removed; identical pointer effect and cleanup retained",
+    "Only Drop sections selected from motion/play CSS",
+    "Reduced-motion rules limited to selected components",
+    "HP input supports one WAV, not OS HTML/packages or product storage"
+  ]
+}

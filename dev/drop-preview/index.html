@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Kirin OS · Drop体験 開発プレビュー</title>
+  <link rel="stylesheet" href="./preview.css">
+  <link rel="stylesheet" href="./kirin-ui/normalStone.css">
+  <link rel="stylesheet" href="./kirin-ui/dropMotion.css">
+  <link rel="stylesheet" href="./kirin-ui/dropPlay.css">
+  <link rel="stylesheet" href="./kirin-ui/host.css">
+  <link rel="stylesheet" href="./kirin-ui/instruments/instruments.css">
+  <script type="module" src="./preview.mjs"></script>
+</head>
+<body data-kirin-stone="true">
+  <header class="topbar">
+    <a class="wordmark" href="/ja/">KIRIN MASTERING</a>
+    <span class="preview-label">開発プレビュー · LOCAL ONLY <span id="light-label"></span></span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="intro-title">
+      <div>
+        <p class="eyebrow">Kirin OS / A FIRST LOOK</p>
+        <h1 id="intro-title">Drop<span class="gold-dot">.</span></h1>
+        <p class="lead">音源を置いて、<wbr>特徴を確かめる。</p>
+        <p class="intro-copy">音量と聴感の変化を見て、同じ場所を聴き直す。<br>拍やコードの候補から、制作やステージの準備も。</p>
+        <p class="small-note">Kirin OSの使い道に触れる、小さな体験版。全機能のWeb版ではありません。</p>
+        <p class="mobile-privacy">音源は端末内だけ。アップロード・保存・自動再生なし。</p>
+      </div>
+      <div class="privacy-stone">
+        <span class="stone-mark" aria-hidden="true">ON YOUR DEVICE</span>
+        <p>音源は、この端末の中だけ。</p>
+        <span>アップロード・保存・自動再生なし</span>
+      </div>
+    </section>
+
+    <section class="desk" id="desk" data-input-state="idle" aria-label="音源の読み込みと測定">
+      <aside class="drop-area" id="drop-area">
+        <div class="desk-head"><span>01 / DROP</span><span class="tiny-engraving" id="input-state">WAITING</span></div>
+        <div class="drop-basin" data-stone-basin data-jungle-main-window>
+          <button type="button" id="basin-touch" data-jungle-main-window-fill aria-label="Kirin OS Drop。音源をドロップ。押すと波紋が広がります。">
+            <span data-drop-ripples aria-hidden="true"></span>
+            <span data-drop-brand aria-hidden="true">Kirin OS</span>
+            <span data-drop-text>ここに音源を<wbr>ドロップ。</span>
+            <span data-drop-hint>WAV</span>
+            <span data-drop-routes aria-hidden="true"><span data-drop-chip="audio">Audio</span></span>
+          </button>
+          <button type="button" id="choose-files" data-drop-choose-files><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 14 1.5-3H22l-3 9H2V6a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v2"/></svg>ファイルを選択</button>
+          <input id="audio-file" class="sr-only" type="file" accept=".wav,audio/wav,audio/x-wav" aria-label="測定するWAVを選ぶ" tabindex="-1">
+        </div>
+        <div class="input-actions"><p>音源を置いて、測定を始める。</p><button type="button" class="text-button" id="demo">デモ音源で試す <span aria-hidden="true">↗</span></button></div>
+        <p class="limits">モノラル / ステレオ · 64 MiB以下 · 10分以内<br>PCM / IEEE float WAV · 8〜192 kHz</p>
+        <p class="status" id="status" role="status" aria-live="polite">音源を待っています。</p>
+        <button type="button" class="text-button" id="clear" disabled>音源と結果をクリア</button>
+      </aside>
+
+      <section class="read-area" id="read-area" aria-labelledby="read-title" aria-busy="false">
+        <div class="desk-head"><span>02 / READ</span><span>MEASURE / LISTEN</span></div>
+        <div class="read-title"><h2 id="read-title">音の輪郭を、<wbr>見てみる。</h2><span class="file-chip" id="file-name">NO FILE</span></div>
+        <div class="empty" id="empty">
+          <span class="empty-instrument" aria-hidden="true"><span></span><span></span><span></span></span>
+          <p>測定結果は、ここに。</p><span>音源を選ぶと、波形・音量・心理音響・拍・コード候補が表示されます。</span>
+        </div>
+        <div id="results" hidden>
+          <div id="instruments" class="instrument-window work-observation" data-kirin-no-glint></div>
+          <details class="measurement-detail"><summary>キリンの目とVUの読み方</summary><p id="instrument-note">目の外周は全曲のLUFS-M、瞳はLRA、花輪と色はBarkの平均から描きます。再生位置の光と瞳の大きさだけが動き、星を押すとLUFS-Mが最大の時刻へ移動します。色は音質の良し悪しを表しません。</p><p>VUは100 msごとの左右の整流平均。0 VUは選んだ−12〜−20 dBFSの正弦波を基準にし、針は約300 msで追います。直近400 msのSample Peakが−1 dBFS以上で灯がともります。True Peakの警告ではありません。</p><p>表示部品はKirin OSと共通です。測定はこのページの公開コアで行い、本体との全項目の精度一致を意味しません。目を描くのに十分な測定がない音源では、測定済みの模様を表示しません。</p></details>
+          <div class="plot-head"><span id="plot-label">WAVEFORM / 全曲</span><span id="duration-label"></span></div>
+          <div class="plot work-observation" data-kirin-no-glint id="plot" role="img" aria-label="全曲の左右の波形"></div>
+          <div class="transport">
+            <button type="button" id="play" class="play-button" aria-label="再生">▶</button>
+            <label class="seek-wrap"><span class="sr-only">再生位置</span><input id="seek" type="range" min="0" max="1" step="0.01" value="0"></label>
+            <output id="position" for="seek">0:00.0</output>
+          </div>
+          <p class="play-note">クリックして聴き直す。再生音量は端末側で調整できます。</p>
+          <dl class="metrics">
+            <div><dt>Integrated loudness</dt><dd><span id="lufs">—</span><small>LUFS · 全曲</small></dd></div>
+            <div><dt>True Peak <span class="candidate-tag">公開共通コア</span></dt><dd><span id="true-peak">—</span><small>dBTP</small></dd></div>
+            <div><dt>Sample Peak</dt><dd><span id="peak">—</span><small>dBFS</small></dd></div>
+            <div><dt>RMS</dt><dd><span id="rms">—</span><small>dBFS</small></dd></div>
+            <div><dt>Sample rate</dt><dd><span id="sample-rate">—</span><small>kHz</small></dd></div>
+            <div><dt>Bit depth</dt><dd><span id="bits">—</span><small>bit</small></dd></div>
+            <div><dt>Loudness Range</dt><dd><span id="lra">—</span><small id="lra-note">LU · 全曲</small></dd></div>
+          </dl>
+          <div class="loudness-panel">
+            <div class="plot-head"><span>LOUDNESS / 100 ms間隔</span><span><span class="legend-m">● M · 400 ms</span> <span class="legend-s">● S · 3秒</span></span></div>
+            <div class="loudness-plot" id="loudness-plot" role="img" aria-label="全曲のMomentaryとShort-term LUFSの変化"></div>
+            <p class="current-values" id="loudness-current">再生位置の値を表示します。</p>
+            <p class="small-note">LUFS・True Peak・LRAは、公開ライブラリをWASMで実行します。本体の非公開の測定コードは含めていません。製品バイナリとの照合は未完了です。</p>
+          </div>
+          <details class="measurement-detail"><summary>測定の条件と左右の値を見る</summary>
+            <p>Sample Peakは元のサンプル値の最大絶対値。True Peakとは別の値です。</p>
+            <p>RMSは全曲の二乗平均平方根。ステレオは左右の平均パワーから求めます。振幅1を0 dBFSとし、無音は−∞で表示します。</p>
+            <p id="metadata"></p><p id="channel-values"></p>
+            <p id="loudness-method"></p><p id="true-peak-method"></p>
+            <p>波形は振幅−1〜1の範囲で表示します。範囲を超えたfloat音源も、Sample PeakとRMSは元の値から計算します。</p>
+            <p>LUFS・True Peakはebur128 0.1.10。Kirin OS本体との数値一致は未確認です。LRAは3秒未満・ゲート以下では表示しません。60秒未満のLRAは、安定前の暫定値として表示します。</p>
+          </details>
+          <p id="capability-errors" class="status" role="status"></p>
+        </div>
+      </section>
+    </section>
+
+    <section id="psycho-results" class="psycho-section" hidden aria-labelledby="psycho-title">
+      <div class="next-head"><p class="eyebrow">HEARING / ANOTHER VIEW</p><h2 id="psycho-title">聴感の変化も、<wbr>確かめる。</h2><p>音の大きさを示すZwicker Loudnessと、鋭さを示すSharpness。数値と時間変化を見て、同じ場所を耳で確認できます。</p></div>
+      <div class="music-grid">
+        <article class="music-card">
+          <div class="desk-head"><span>LOUDNESS / SHARPNESS</span><span class="candidate-tag">Hypha公開コア</span></div>
+          <dl class="metrics psycho-metrics"><div><dt>Zwicker Loudness</dt><dd><span id="sone">—</span><small>sone · 全曲平均</small></dd></div><div><dt>Sharpness</dt><dd><span id="sharpness">—</span><small>acum · 全曲平均</small></dd></div></dl>
+          <label class="control-label" for="psycho-metric">時間変化を見る項目</label><select id="psycho-metric"><option value="sharpness">Sharpness · acum</option><option value="loudness">Zwicker Loudness · sone</option></select>
+          <div id="psycho-plot" class="loudness-plot" role="img" aria-label="心理音響の時間変化"></div><p id="psycho-current" class="current-values"></p>
+          <p class="small-note">Sharpnessの変化が大きい観測位置へ移動できます。自動再生や良し悪しの判定はしません。</p><div id="psycho-jumps" class="time-list"></div>
+        </article>
+        <article class="music-card">
+          <div class="desk-head"><span>BARK / SPECIFIC LOUDNESS</span><span>0–24 Bark</span></div>
+          <h3>どの帯域が、<wbr>どう聴こえる？</h3><p>聴覚の帯域に沿った音の大きさを、20区分で表示します。周波数スペクトラムの振幅とは別の指標です。</p>
+          <label class="control-label" for="bark-position">表示する範囲</label><select id="bark-position"><option value="mean">全曲の平均</option><option value="position">再生位置までの最新値</option></select>
+          <div id="bark-plot" class="bark-plot" role="img" aria-label="0から24 BarkのSpecific Loudness、20区分"></div>
+          <label class="control-label" for="bark-band">気になる帯域を選ぶ</label><select id="bark-band"></select><p id="bark-current" class="current-values"></p>
+          <details><summary>20区分の数値とPSBを見る</summary><div class="bark-table-wrap"><table class="bark-table"><thead><tr><th scope="col">Bark</th><th scope="col">sone/Bark</th><th scope="col">PSB</th></tr></thead><tbody id="bark-values"></tbody></table></div></details>
+        </article>
+      </div>
+      <details class="scope music-conditions"><summary>心理音響の仮定と測定条件</summary><p id="psycho-state"></p><p>音源から実際の部屋の音圧は分かりません。0 dBFSを1 Paとする本体の計算上の仮定を使います。SPLや耳への安全性を実測した値ではありません。</p><p>ISO 532-1の計算とDIN 45692 WidmannのSharpnessを、公開済みHyphaの計算コードで実行します。内部は2 kHz、表示は約100 ms間隔。全曲平均は内部の全観測値から求めます。Barkの各区分は1.2 Bark幅、PSBは同コアのN′／Nです。</p><p>左右を別々に計算して平均します。Kirin OSの非公開の測定コードは含まず、OS本体のチャンネル集計・バッチ処理との全項目一致は未受入です。Perceptual Entropy・Bark Masking Depth・roughness・KPQなどは未搭載です。</p></details>
+      <p class="feature-bridge">気になった帯域や時刻を手がかりに、処理の前後を確かめる。<a href="/ja/hypha">HyphaのPRE / POST測定を知る</a>。このページの音源や結果は渡しません。</p>
+    </section>
+
+    <section id="music-results" class="music-section" hidden aria-labelledby="music-title">
+      <div class="next-head"><p class="eyebrow">03 / FIND THE MUSIC</p><h2 id="music-title">拍とコードから、<wbr>音楽の流れへ。</h2><p>ここは測定値ではなく音楽解析の候補です。自動で確定・保存せず、耳で確認します。</p></div>
+      <div class="music-grid">
+        <article class="music-card">
+          <div class="desk-head"><span>BEAT / TEMPO</span><span class="candidate-tag">候補 · 未校正</span></div>
+          <h3>同じ拍を、<wbr>聴き直す。</h3>
+          <p id="rhythm-summary"></p>
+          <label class="control-label" for="tempo-choice">下書きに使うテンポ候補</label><select id="tempo-choice"><option value="">未選択</option></select>
+          <div id="beat-plot" class="beat-plot" role="img" aria-label="音源のオンセットから選んだ拍候補の位置"></div>
+          <div id="beat-list" class="time-list" aria-label="拍候補の再生位置"></div>
+          <div class="pager"><button id="beat-prev" type="button">前の拍へ</button><span id="beat-page"></span><button id="beat-next" type="button">次の拍へ</button></div>
+          <p class="small-note">数字はテンポ候補。拍子・小節頭は未判定です。BPMから等間隔の拍を作っていません。</p>
+        </article>
+        <article class="music-card">
+          <div class="desk-head"><span>CHORD / HARMONY</span><span class="candidate-tag">候補 · 未校正</span></div>
+          <h3>変わり目を、<wbr>確かめる。</h3>
+          <p id="harmony-summary"></p>
+          <div id="chord-list" class="chord-list" aria-label="コード候補の区間"></div>
+          <div class="pager"><button id="chord-prev" type="button">前の区間へ</button><span id="chord-page"></span><button id="chord-next" type="button">次の区間へ</button></div>
+          <p class="small-note">候補を押すと区間の先頭へ移動します。無音や判定できない区間は「不明」。コードなしと断定しません。</p>
+        </article>
+      </div>
+      <details class="scope music-conditions"><summary>拍・コード候補の解析条件と制約</summary><p>拍はオンセットの繰り返しから一定テンポの候補を求め、その証拠に沿って位置を選びます。テンポ変化や弱いアタック、複雑なリズムでは候補が外れることがあります。</p><p>コードは12音のクロマと23種類の理論テンプレートを照合します。9th・11th・13thを含む表記を候補にできますが、実際の音域や転回、ベース音、調の検出を保証するものではありません。確からしさの校正と実楽曲での本体照合は未完了です。</p><p>音楽解析だけは6次ローパス処理後に最大12 kHzへ変換します。左右は別々に解析して合算します。LUFS・True Peak・RMS・Sample Peakは元WAVから計算します。</p></details>
+    </section>
+
+    <section id="draft-entry" class="draft-entry" hidden aria-labelledby="draft-entry-title">
+      <div><p class="eyebrow">04 / MAKE A NEXT STEP</p><h2 id="draft-entry-title">聴いた結果を、<wbr>下書きに。</h2><p>コード候補を選び、歌詞やメモを添えてみる。測定が、演奏の準備へつながるところを体験できます。</p></div>
+      <button id="make-draft" type="button" class="solid-button">コード譜の下書きを作る <span aria-hidden="true">↗</span></button>
+    </section>
+    <section id="draft-section" class="draft-section" hidden aria-labelledby="draft-title">
+      <div class="desk-head"><span>REHEARSAL SHEET / この端末だけ</span><span>NOT SAVED / NOT SHARED</span></div>
+      <h2 id="draft-title">候補を選んで、<wbr>言葉を添える。</h2>
+      <p>候補はまだ採用されていません。区間ごとに選ぶか、自分でコードを書きます。「不明」のままでも進められます。</p>
+      <label class="control-label" for="sheet-title">下書きのタイトル</label><input id="sheet-title" maxlength="120" value="コード譜の下書き">
+      <div id="draft-rows" class="draft-rows"></div>
+      <div class="pager"><button id="draft-prev" type="button">前の区間へ</button><span id="draft-page"></span><button id="draft-next" type="button">次の区間へ</button></div>
+      <div class="sheet-preview" aria-labelledby="sheet-preview-title"><p class="eyebrow">あなたが選んだ下書き / このページの区間</p><h3 id="sheet-preview-title">コード譜の下書き</h3><p id="sheet-meta"></p><div id="sheet-lines"></div><p id="draft-summary" role="status" aria-live="polite"></p></div>
+      <p class="small-note">これはHP体験用の下書きです。Kirin OSへの保存、STAGEへの受け渡し、QRコード共有、別端末での閲覧は未接続です。音源をクリアすると下書きも消えます。</p>
+    </section>
+
+    <section class="next-section" aria-labelledby="next-title">
+      <div class="next-head"><p class="eyebrow">FROM MEASUREMENT TO MAKING</p><h2 id="next-title">測ったあとに、<wbr>何をする？</h2><p>体験で見た情報から、Kirin OS本体の使い道へ。以下は機能紹介です。このページから製品への保存・連携は行いません。</p></div>
+      <div class="paths">
+        <article><span class="path-number">01</span><h3>比べて、<wbr>判断する。</h3><p>LUFSや聴感の時間変化を、同じ位置で聴き直す。本体では別のVersionやHyphaのPRE / POST記録との比較へ。</p><span class="path-tag">Version / TRACE</span><a class="path-link" href="/ja/hypha">処理前後の測定を知る</a></article>
+        <article><span class="path-number">02</span><h3>作品に、<wbr>残す。</h3><p>数値だけでなく「どこを聴き、何を判断したか」。本体では測定結果と制作メモを、音源の版と一緒に記録できます。</p><span class="path-tag">Works / Notes</span><a class="path-link" href="/ja/os#os-entrance-title">音源と記録の使い道を見る</a></article>
+        <article><span class="path-number">03</span><h3>演奏の準備へ、<wbr>つなぐ。</h3><p>拍・コード候補を確認し、歌詞やメモを添える下書きを上で試す。本体のSTAGEでは、公演資料として整える使い道へ。</p><span class="path-tag">Arrangement / STAGE</span><a class="path-link" href="/ja/os#evaluation">本体の14日間評価で確かめる</a></article>
+      </div>
+      <div class="product-step"><p>比較・記録・共有まで使ってみたい方へ。</p><a class="solid-button" href="/ja/os#evaluation">Kirin OSの14日間評価へ <span aria-hidden="true">↗</span></a><a class="text-button" href="/ja/downloads#kirin-os-downloads">最新版の取得方法を見る</a></div>
+    </section>
+    <details class="scope"><summary>体験版の範囲と精度確認の状況</summary><p>元WAVの情報・波形・Sample Peak・RMS・LUFS-I／M／S・True Peak・LRA、Zwicker Loudness・Sharpness・Bark Specific Loudness・PSB、キリンの目・VU、拍／テンポ・コード候補、端末内の再生、候補を選ぶコード譜の下書きを試せます。デモは12秒・120 BPM・C → Am → F → Gの合成音。同じ解析への入力です。</p><p>機能の使い道が分かる範囲を選び、全機能の搭載は目標にしません。非公開エンジンは含めません。Hypha記録の取込、実製品への保存・共有は、この体験版の対象外です。</p><p>開発プレビューです。限定した既知信号と共通コアのnative版との照合を進めていますが、製品バイナリ・実楽曲・実ブラウザーでの精度受入は未完了です。拍・コードは特に未校正の候補です。納品や演奏の判断は、本体と耳で確認してください。</p><p>400 ms未満の音源ではLUFS-I／M、3秒未満ではLUFS-Sを表示しません。無音・ゲート以下・判定不能・計算失敗を0の測定値で置き換えません。</p><p>一度に1音源。MP3・AIFF・RF64・WAV extensibleは未対応です。タブを閉じるかクリアすると、このページの測定結果と下書きは失われます。</p></details>
+    <noscript><p>体験にはJavaScriptが必要です。音源を外部へ送信する処理はありません。</p></noscript>
+  </main>
+  <span data-kirin-glint aria-hidden="true"></span>
+  <footer><span>Kirin OS</span><span>DROP EXPERIENCE · DEVELOPMENT PREVIEW · 2026-10-09</span></footer>
+</body>
+</html>

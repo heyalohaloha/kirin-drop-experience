@@ -1,0 +1,73 @@
+/* Kirin OS の小さな工夫（2026-10-08、画面案「白い石の Kirin OS」第 5 版の工夫を本体へ。白い石とジャングルの両方）
+   動く物は、index.css の全画面を静止させる決まり（W-1779）の例外として !important で戻す（設計制約の Motion / G-115-176）。
+   動きを減らす設定では、下の @media で止める。重ね方は普通の重ね方だけ（ぼかし・特殊な重ね方を使わない）。 */
+
+/* ── 縁に光が差す：指の近くの部品の縁だけに、指の位置から金の光（画面に光の輪は一つ） ── */
+[data-kirin-glint] {
+  position: fixed; left: 0; top: 0; width: 0; height: 0; z-index: 70; box-sizing: border-box; padding: 1.5px;
+  pointer-events: none; opacity: 0;
+  --glint: color-mix(in oklab, rgb(236 204 142), rgb(214 224 246) var(--moon-mix, 0%));
+  background: radial-gradient(110px circle at var(--mx, -999px) var(--my, -999px), color-mix(in oklab, var(--glint) 95%, transparent), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: opacity .3s ease !important;
+}
+[data-kirin-glint][data-on="true"] { opacity: 1; }
+
+/* ── 札が指で傾く：指の下がわずかに沈むように（最大 2.2°）。影も光に合わせて動く ── */
+[data-kirin-stone="true"] [data-kirin-tilt] {
+  transform: perspective(var(--tilt-p, 700px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .45s cubic-bezier(.2, .7, .2, 1), box-shadow .3s ease !important;
+}
+[data-kirin-stone="true"] [data-kirin-tilt][data-tilting="true"] {
+  transition: transform .12s ease-out, box-shadow .12s ease-out !important;
+}
+
+/* ── 押すと沈む：0.18 秒で沈んで戻る ── */
+[data-kirin-stone="true"] button[style*="border: 1px solid var(--hairline"]:not([role="tab"]):not([aria-current]):not(:disabled),
+[data-kirin-stone="true"] [data-kirin-topbar] [data-top-nav-collaboration],
+[data-kirin-stone="true"] [data-kirin-hypha-support],
+[data-kirin-stone="true"] [data-drop-choose-files] {
+  transition: box-shadow .18s ease, transform .18s ease !important;
+}
+
+/* ── Drop：溝が光を拾う（光の筋を溝の形に切り抜き、指の向きへ回す。回すだけで描き直さない） ── */
+[data-kirin-stone="true"] [data-drop-brand]::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 1400px; height: 1400px; z-index: -1; pointer-events: none; opacity: 0;
+  transform: translate(-50%, -50%) rotate(var(--ga, 0deg));
+  /* 白い石の上で白い筋だけでは見えにくいので、光の芯にだけ淡い金を混ぜる（指の側が強く、向かいが弱い）。 */
+  background: conic-gradient(from -30deg at 50% 50%, rgb(var(--hl) / 0) 0deg, rgb(var(--hl) / .95) 16deg, color-mix(in oklab, rgb(214 172 96), rgb(196 208 232) var(--moon-mix, 0%)) 30deg, rgb(var(--hl) / .95) 44deg, rgb(var(--hl) / 0) 60deg, rgb(var(--hl) / 0) 180deg, rgb(var(--hl) / .7) 198deg, color-mix(in oklab, rgb(214 172 96 / .6), rgb(196 208 232 / .6) var(--moon-mix, 0%)) 210deg, rgb(var(--hl) / .7) 222deg, rgb(var(--hl) / 0) 240deg, rgb(var(--hl) / 0) 360deg);
+  -webkit-mask: repeating-radial-gradient(circle at center, transparent 0 20.5px, #000 21px 23.5px, transparent 24px 44px), radial-gradient(circle at center, #000 0 210px, transparent 420px);
+  -webkit-mask-composite: source-in;
+  mask: repeating-radial-gradient(circle at center, transparent 0 20.5px, #000 21px 23.5px, transparent 24px 44px), radial-gradient(circle at center, #000 0 210px, transparent 420px);
+  mask-composite: intersect;
+  transition: opacity .5s ease !important;
+}
+[data-kirin-stone="true"] [data-drop-brand][data-sheen="true"]::after { opacity: 1; will-change: transform; }
+
+/* ── Drop：落とす物で札が灯る ── */
+[data-drop-chip] { transition: color .25s ease, box-shadow .25s ease, background .25s ease !important; }
+[data-drop-chip][data-hit="true"] {
+  color: #3b2a0c !important;
+  background: linear-gradient(161deg, #f3dba6, #d9b36c) !important;
+  box-shadow: 0 0 0 1px rgb(201 161 90 / .55), 0 0 14px rgb(233 196 120 / .55) !important;
+}
+/* 白い石では、灯る札も石の金（夜は銀）でそろえる。 */
+[data-kirin-stone="true"] [data-drop-chip][data-hit="true"] {
+  color: var(--ink-primary) !important;
+  background: linear-gradient(161deg, var(--stone-gold-lit), color-mix(in oklab, var(--stone-gold-lit), var(--stone-gold) 62%)) !important;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--stone-gold) 55%, transparent), 0 0 14px color-mix(in oklab, var(--stone-gold-lit) 60%, transparent) !important;
+}
+[data-jungle="true"] [data-drop-chip][data-hit="true"] {
+  color: #1a120b !important;
+  background: #e0bd7e !important;
+  box-shadow: 0 0 0 1px rgb(224 189 126 / .6), 0 0 14px rgb(224 189 126 / .45) !important;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  [data-kirin-glint], [data-drop-chip], [data-kirin-stone="true"] [data-drop-brand]::after { transition: none !important; }
+  [data-kirin-stone="true"] [data-kirin-tilt] { transform: none !important; transition: none !important; }
+  [data-kirin-stone="true"] button { transition: none !important; }
+}

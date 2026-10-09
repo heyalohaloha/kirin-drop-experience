@@ -1,0 +1,55 @@
+/* ── 受け口の波紋（Drop）：押した所に凹み、輪が 3 つ広がって消える。大きさと濃さだけを動かす ── */
+[data-drop-ripple] { position: absolute; border-radius: 50%; pointer-events: none; }
+[data-drop-ripple="ring"] {
+  width: 760px; height: 760px; opacity: 0; transform: translate(-50%, -50%) scale(0);
+  box-shadow: 0 0 0 1px rgb(224 189 126 / .5), 0 0 6px 1px rgb(127 207 216 / .16);
+  animation: kirin-drop-ring 1.9s cubic-bezier(.16, .62, .25, 1) both;
+}
+[data-drop-ripple="dimple"] {
+  width: 120px; height: 120px; opacity: 0; transform: translate(-50%, -50%) scale(.4);
+  background: radial-gradient(circle, rgb(224 189 126 / .14), rgb(224 189 126 / 0) 70%);
+  animation: kirin-drop-dimple 1.1s ease-out both;
+}
+/* 白い石では、輪は光の当たる側が明るく反対が陰る彫りの輪、凹みは石が沈む影。 */
+[data-kirin-stone="true"] [data-drop-ripple="ring"] {
+  box-shadow: calc(var(--sx) * -1px) calc(var(--sy) * -1.2px) 0 1px rgb(var(--hl) / .95), calc(var(--sx) * 1.2px) calc(var(--sy) * 1.8px) 3px 1px rgb(var(--sh) / .2);
+}
+[data-kirin-stone="true"] [data-drop-ripple="dimple"] {
+  background: none;
+  box-shadow: inset calc(var(--sx) * 5px) calc(var(--sy) * 7px) 16px rgb(var(--sh) / .22), inset calc(var(--sx) * -2px) calc(var(--sy) * -2px) 0 rgb(var(--hl) / .9);
+}
+@keyframes kirin-drop-ring { 0% { opacity: 1; transform: translate(-50%, -50%) scale(0); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1); } }
+@keyframes kirin-drop-dimple { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.4); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.15); } }
+/* 受け止める間（0.7 秒）、受け口が一段深く沈む。 */
+[data-kirin-stone="true"] [data-stone-basin] { transition: box-shadow .3s ease; }
+[data-kirin-stone="true"] [data-stone-basin][data-taking="true"] {
+  box-shadow:
+    inset calc(var(--sx) * 9px) calc(var(--sy) * 13px) 30px rgb(var(--sh) / .22),
+    inset calc(var(--sx) * 1.5px) calc(var(--sy) * 2px) 3px rgb(var(--sh) / .16),
+    inset calc(var(--sx) * -2px) calc(var(--sy) * -2.2px) 0 rgb(var(--hl) / .92) !important;
+}
+/* ファイルを選ぶボタン：白い石では浮き出た石の札、押すと沈む。 */
+[data-kirin-stone="true"] [data-drop-choose-files] {
+  border: 0 !important;
+  background: linear-gradient(var(--la), var(--stone-lit), var(--stone) 72%) !important;
+  color: var(--stone-gold-ink, #85662d) !important;
+  box-shadow:
+    inset calc(var(--sx) * 1px) calc(var(--sy) * 1.2px) 0 rgb(var(--hl) / .92),
+    inset calc(var(--sx) * -1px) calc(var(--sy) * -1.1px) 0 rgb(var(--sh) / .07),
+    calc(var(--sx) * 3px) calc(var(--sy) * 4px) 10px -2px rgb(var(--sh) / .2),
+    calc(var(--sx) * .6px) calc(var(--sy) * 1px) 1.5px rgb(var(--sh) / .17) !important;
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+[data-kirin-stone="true"] [data-drop-choose-files]:active {
+  transform: translateX(-50%) translate(calc(var(--sx) * .6px), calc(var(--sy) * .9px)) !important;
+  box-shadow: inset calc(var(--sx) * 2px) calc(var(--sy) * 2.6px) 5px rgb(var(--sh) / .22), inset calc(var(--sx) * -1px) calc(var(--sy) * -1px) 0 rgb(var(--hl) / .85) !important;
+}
+[data-drop-choose-files]:focus-visible { outline: 1px solid var(--tone-gold, #a88443); outline-offset: 3px; }
+
+
+[data-drop-ripple="ring"] { animation: kirin-drop-ring 1.9s cubic-bezier(.16, .62, .25, 1) both !important; }
+[data-drop-ripple="dimple"] { animation: kirin-drop-dimple 1.1s ease-out both !important; }
+@media (prefers-reduced-motion: reduce) {
+  [data-drop-ripple] { display: none !important; animation: none !important; }
+  [data-kirin-stone="true"] [data-stone-basin] { transition: none !important; }
+}

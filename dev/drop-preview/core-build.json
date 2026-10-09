@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "recipe": "hp-common-core-v2",
+  "sourcePaths": "crate and pinned registry dependency paths remapped; private paths excluded",
+  "rustc": "rustc 1.94.1 (e408947bf 2026-03-25)",
+  "publicDeployment": "not-approved",
+  "productBinaryParity": "not-tested",
+  "cores": {
+    "measurement-core": {
+      "wasm": "level-core.wasm",
+      "sha256": "74cce47a0eed160b5e1ac6d2d9455855b5d7d8e8558b4240a74d35e46de8ead6",
+      "bytes": 103632,
+      "license": "MIT dependency",
+      "cargoLockSha256": "b2920ef1925f14ea85e7dbbfc4fab115fdd76b686d3f94b8b8c92b6b2c0ce608"
+    },
+    "psycho-core": {
+      "wasm": "psycho-core.wasm",
+      "sha256": "6e46095ad46424cba06d35fe6e8f9aa7b6d45e841eda5dc07bfb60efc90cd3a2",
+      "bytes": 360032,
+      "license": "GPL-3.0-only",
+      "cargoLockSha256": "fccf84e067a6a1e186ab02c2a7bf670ded55feb4590bd67e7bccbdbace24c408"
+    }
+  },
+  "psychoSource": {
+    "commit": "6ba9fe20e681d369c1de08e1c74b1ef2406dc010",
+    "manifestSha256": "42dcb6a80393d29a2f36118302cc1024578b4983d581974af9b1d5b88c1f7260"
+  }
+}

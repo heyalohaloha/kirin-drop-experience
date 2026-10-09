@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "approvedBy": "Daisuke",
+  "approvedOn": "2026-10-09",
+  "authorization": "User approved publishing only the Drop experience code under GPLv3.",
+  "license": "GPL-3.0-only",
+  "scope": "drop-experience-corresponding-source-only",
+  "privateOsMeasurementSource": "excluded",
+  "wholeHpRepository": "excluded",
+  "photographyAndFonts": "excluded",
+  "productionPageAcceptance": "not-complete"
+}

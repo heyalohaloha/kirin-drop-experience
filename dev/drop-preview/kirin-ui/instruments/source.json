@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "sourceCommit": "716a3a0be91703ba3aee945089514c173d5f28b1",
+  "approvedBy": "Daisuke",
+  "approvedOn": "2026-10-09",
+  "scope": "presentation-only",
+  "measurementEngineIncluded": false,
+  "sources": [
+    {
+      "path": "src/components/common/KirinEye.jsx",
+      "sha256": "ea3b59c536c471943a75ac372f1252e4e335622e5a1256b2d6c9e39381bc7812"
+    },
+    {
+      "path": "src/components/common/kirinEyeModel.js",
+      "sha256": "e0a4910947a8a3ad8cb5967d9954878a27cd975d0d33ece049bde4f1c81e622d"
+    },
+    {
+      "path": "src/components/common/KirinVuPair.jsx",
+      "sha256": "9c36378d97aa06663c063c9eb545b6e78d0744d78f6f1e669adffae3ea94fffc"
+    },
+    {
+      "path": "src/components/common/kirinVuModel.js",
+      "sha256": "e998ede772fe43e6b31fffff2a639da6778d91201eb526d6135759c57b895ac9"
+    },
+    {
+      "path": "src/styles/kirinInstruments.css",
+      "sha256": "c4a440481357029f0922c3895292db535dc389b66be0d70483f9732d188334e5"
+    }
+  ],
+  "hostFiles": [
+    {
+      "path": "entry.jsx",
+      "bytes": 1914,
+      "sha256": "3fd9f7efe400f3fa9ca47c944153666f1b6603981d667103a4e163b0d1daabbc"
+    },
+    {
+      "path": "host-hooks.mjs",
+      "bytes": 420,
+      "sha256": "790b65066db90b9e48834538dc1f56ade0138147134e3c440e05486e2f848e16"
+    },
+    {
+      "path": "reading.mjs",
+      "bytes": 1608,
+      "sha256": "11d5d1ac38fe3b25ef6ca18fd10b714da0a8bb5c93a36a71f0093ec72b12826b"
+    },
+    {
+      "path": "package.json",
+      "bytes": 38,
+      "sha256": "ad91c9ac9136396f5249a45e093bab863e9a23646620d911af827986f6180283"
+    }
+  ],
+  "files": [
+    {
+      "path": "KirinEye.jsx",
+      "bytes": 10223,
+      "sha256": "5b1432780556259ac3ce7287a58cc9b66586efa62104b3c9710fa9f481e9fad4"
+    },
+    {
+      "path": "kirinEyeModel.js",
+      "bytes": 4024,
+      "sha256": "9e46c109fe12aa559d7b15ed06d6627d76baee455a386d7a7e2aa27a861fcfa0"
+    },
+    {
+      "path": "KirinVuPair.jsx",
+      "bytes": 6843,
+      "sha256": "9d23eb9bb0fcc0ac881111835197e2367976b66e040c98bbdb9b3762e4681d4e"
+    },
+    {
+      "path": "kirinVuModel.js",
+      "bytes": 1322,
+      "sha256": "e998ede772fe43e6b31fffff2a639da6778d91201eb526d6135759c57b895ac9"
+    },
+    {
+      "path": "instruments.css",
+      "bytes": 10445,
+      "sha256": "4f71eb68495b16bf1f4aed38981f3d05ed6608b106dc322b681caea7e662ad39"
+    },
+    {
+      "path": "instruments.mjs",
+      "bytes": 157945,
+      "sha256": "8501c935af0513326f8ead8205d18f3b612293ffb146dd6d442bc74e64bdf248"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "react",
+      "version": "18.3.1"
+    },
+    {
+      "name": "react-dom",
+      "version": "18.3.1"
+    },
+    {
+      "name": "scheduler",
+      "version": "0.23.2"
+    },
+    {
+      "name": "esbuild",
+      "version": "0.21.5"
+    }
+  ],
+  "adaptations": [
+    "Product artifact/terrain adapters excluded; exact Eye series/tone mapping retained",
+    "HP stone-light and translation adapters only",
+    "Normal-mode VU only; session preference, no persistent storage",
+    "SVG glow filters removed to meet HP dynamic-filter standard",
+    "Exact JSX/SVG, scale, sensitivity, needle and pupil motion retained; reduced-motion exceptions retained"
+  ]
+}

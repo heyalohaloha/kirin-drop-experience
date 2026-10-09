@@ -1,0 +1,125 @@
+{
+  "name": "MoSQITo",
+  "version": "1.2.1",
+  "archiveSha256": "50c0ebdc5102c67cfe4362178ce07d7e6b3211d7cb3e6051082e503ff019f16f",
+  "license": "Apache-2.0",
+  "noticeFile": "none-in-official-sdist",
+  "tables": [
+    {
+      "rust": "FILTER_REF",
+      "upstream": "third_octave_filter_ref",
+      "values": 18,
+      "equal": true
+    },
+    {
+      "rust": "FILTER_DIFF",
+      "upstream": "third_octave_filter",
+      "values": 504,
+      "equal": true
+    },
+    {
+      "rust": "FILTER_GAIN",
+      "upstream": "filter_gain",
+      "values": 28,
+      "equal": true
+    },
+    {
+      "rust": "BAND_CENTER_FREQS",
+      "upstream": "freq",
+      "values": 28,
+      "equal": true
+    },
+    {
+      "rust": "RAP",
+      "upstream": "rap",
+      "values": 8,
+      "equal": true
+    },
+    {
+      "rust": "DLL",
+      "upstream": "dll",
+      "values": 88,
+      "equal": true
+    },
+    {
+      "rust": "LTQ",
+      "upstream": "ltq",
+      "values": 20,
+      "equal": true
+    },
+    {
+      "rust": "A0",
+      "upstream": "a0",
+      "values": 20,
+      "equal": true
+    },
+    {
+      "rust": "DDF",
+      "upstream": "ddf",
+      "values": 20,
+      "equal": true
+    },
+    {
+      "rust": "DCB",
+      "upstream": "dcb",
+      "values": 20,
+      "equal": true
+    },
+    {
+      "rust": "ZUP",
+      "upstream": "zup",
+      "values": 21,
+      "equal": true
+    },
+    {
+      "rust": "RNS",
+      "upstream": "rns",
+      "values": 18,
+      "equal": true
+    },
+    {
+      "rust": "USL",
+      "upstream": "usl",
+      "values": 144,
+      "equal": true
+    }
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    },
+    {
+      "path": "PKG-INFO",
+      "sha256": "f564b22aa74f24c68818d5b245072b4948d544d50348dd56ae1bbf76dd7875a9"
+    },
+    {
+      "path": "mosqito/sq_metrics/loudness/loudness_zwtv/_third_octave_levels.py",
+      "sha256": "bc0fc7138677d9037e5726887d2eeedd15d38393146c1a4df07b1a93cdccc881"
+    },
+    {
+      "path": "mosqito/sq_metrics/loudness/loudness_zwtv/_nonlinear_decay.py",
+      "sha256": "3ec59ae8a7ea506e8462aceac23d3b01791148ec8846908adecfc08dc968b9b7"
+    },
+    {
+      "path": "mosqito/sq_metrics/loudness/loudness_zwtv/_temporal_weighting.py",
+      "sha256": "451d6e564ff647a35e67650c367d1c494d721a6cf617603a80f2a8ff868abc3a"
+    },
+    {
+      "path": "mosqito/sq_metrics/loudness/loudness_zwtv/_square_and_smooth.py",
+      "sha256": "045d27339d43c8968018a2876e9e5cbd3a6dc43141882fbca367d15ac717974c"
+    },
+    {
+      "path": "mosqito/sq_metrics/loudness/loudness_zwst/_main_loudness.py",
+      "sha256": "6cc3ba726a89911eac14f5f1d714a09615475b8c47ae2dc672bfa1b4aa08ec21"
+    },
+    {
+      "path": "mosqito/sq_metrics/loudness/loudness_zwst/_calc_slopes.py",
+      "sha256": "35f3af5f8ad285be2d5c1778be2c3ba38caff425c086a00ac06300a3f22f33f3"
+    },
+    {
+      "path": "mosqito/sq_metrics/sharpness/sharpness_din/sharpness_din_from_loudness.py",
+      "sha256": "85b2c5ce64edab54e56047de5d0a26b192491e54f21f36d46c1544225c38afa3"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "product": "Kirin Hypha",
+  "commit": "6ba9fe20e681d369c1de08e1c74b1ef2406dc010",
+  "license": "GPL-3.0-only",
+  "modifiedCalculations": false,
+  "files": [
+    {
+      "original": "crates/kirin_measure/src/phase_d/calc_slopes.rs",
+      "destination": "phase_d/calc_slopes.rs",
+      "sha256": "09cc7f26156c8b0f145df7956019b0e398bbcc6210f0b00c5441a4d509450400"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/core_loudness.rs",
+      "destination": "phase_d/core_loudness.rs",
+      "sha256": "e4c517173470dba6171350bc03d3da37005f5e61b4f23653b8f6d24a202e648d"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/display.rs",
+      "destination": "phase_d/display.rs",
+      "sha256": "73505e62986c37946c1782cc7193099133f120148cf1f9364084e83704f7389c"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/filter_bank.rs",
+      "destination": "phase_d/filter_bank.rs",
+      "sha256": "425c77eddc613f3cd4bf4fdff90204bef00e7a2a20e1899940858ff9d8382f85"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/nonlinear_decay.rs",
+      "destination": "phase_d/nonlinear_decay.rs",
+      "sha256": "93fc0032b0866273bf19a228b06f5eb082cb4a98fef139c6be05e418677e700a"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/sharpness.rs",
+      "destination": "phase_d/sharpness.rs",
+      "sha256": "58759abbcb8e3455ea73bec6ba683a2c0de72c1bb916686b2eaf5d57de63673b"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/spectral_balance.rs",
+      "destination": "phase_d/spectral_balance.rs",
+      "sha256": "02c463382f21fddb0ed2a4a0763ce17368d567dca506308c1f33bf90645b30e1"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/stft.rs",
+      "destination": "phase_d/stft.rs",
+      "sha256": "4394605e4aa779a34bdb24e27b8f59f0f7f9cc758e896fe10a5485567c997dcb"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/stream.rs",
+      "destination": "phase_d/stream.rs",
+      "sha256": "c06d66ce21796d1cde519f1693144f44a339da3963ac53f6001686b9755e244d"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/tables.rs",
+      "destination": "phase_d/tables.rs",
+      "sha256": "878067e49a7dd3230e41f95015db5b01ccedd80efa69026d923e2e0453ebe2a0"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/tables/tables_psb.rs",
+      "destination": "phase_d/tables/tables_psb.rs",
+      "sha256": "628f50866de238f47686f5582667ddf78f2ade36fc62207b43adf797feb7d379"
+    },
+    {
+      "original": "crates/kirin_measure/src/phase_d/temporal_weighting.rs",
+      "destination": "phase_d/temporal_weighting.rs",
+      "sha256": "f33d8ffcc9c341a38196a0bdea6077031f49d693469a623b0ddf2b3c0413c3a2"
+    },
+    {
+      "original": "crates/kirin_measure/src/resampler.rs",
+      "destination": "resampler.rs",
+      "sha256": "e9268abf0fe0845c4e3262d29c125631c0b9770455417435e4c943c6ee0d2966"
+    },
+    {
+      "original": "LICENSE",
+      "destination": "LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  ]
+}

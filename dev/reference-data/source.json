@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "commit": "6ba9fe20e681d369c1de08e1c74b1ef2406dc010",
+  "repository": "https://github.com/heyalohaloha/kirin_hypha",
+  "license": "GPL-3.0-only",
+  "reference": "MoSQITo 1.2.1 / Apache-2.0",
+  "files": [
+    {
+      "file": "mosqito_phase_d_1_2_1.json",
+      "original": "crates/kirin_measure/tests/fixtures/mosqito_phase_d_1_2_1.json",
+      "sha256": "6bf37a5acb5ab6f407f66427738def7d63faa5390b2ade0311bf3e82e61d327b",
+      "url": "https://github.com/heyalohaloha/kirin_hypha/blob/6ba9fe20e681d369c1de08e1c74b1ef2406dc010/crates/kirin_measure/tests/fixtures/mosqito_phase_d_1_2_1.json"
+    },
+    {
+      "file": "mosqito_perceptual_delta_1_2_1.json",
+      "original": "crates/kirin_measure/tests/fixtures/mosqito_perceptual_delta_1_2_1.json",
+      "sha256": "d8b54e43332a4b56c45c83767a5402a92535ca76374c63c630afe531b58f6517",
+      "url": "https://github.com/heyalohaloha/kirin_hypha/blob/6ba9fe20e681d369c1de08e1c74b1ef2406dc010/crates/kirin_measure/tests/fixtures/mosqito_perceptual_delta_1_2_1.json"
+    }
+  ]
+}
