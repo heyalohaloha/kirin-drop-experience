@@ -43,7 +43,7 @@ export function applyLiteralStyle(element, name) {
 }
 
 // The OS calculation/model boundary ends before this adapter: presentation only.
-export function initialisePresentation() {
+export function initialisePresentation({formatLight = light => `${light.term[0]} · ${light.night > .5 ? "月明かり" : "太陽の光"}`} = {}) {
   const body = document.body, basin = document.querySelector("[data-stone-basin]");
   const touch = document.getElementById("basin-touch"), brand = document.querySelector("[data-drop-brand]");
   const ripples = document.querySelector("[data-drop-ripples]");
@@ -63,7 +63,7 @@ export function initialisePresentation() {
     const date = presentationDate(new Date(), new URLSearchParams(location.search).get("stoneHour"));
     const light = stoneLightAt(date);
     for (const [name, value] of Object.entries(light.vars)) body.style.setProperty(name, value);
-    document.getElementById("light-label").textContent = `${light.term[0]} · ${light.night > .5 ? "月明かり" : "太陽の光"}`;
+    document.getElementById("light-label").textContent = formatLight(light);
     lightTimer = setTimeout(updateLight, 60000 - Date.now() % 60000 + 50);
   };
   const rippleAt = (event) => { if (active) kirinDropRipple(ripples, event?.clientX, event?.clientY, { reduceMotion: kirinPrefersReducedMotion() }); };

@@ -64,8 +64,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4793,
-      "sha256": "d9bd79d14506e25e3165354302b8e3c01b3fad2f2d1a855056495c2acdebbaa0"
+      "bytes": 5590,
+      "sha256": "3b5487e7fa6a40c5db2060f7d25e11cb3daf6634b7bab81de0afa8048f11e240"
     },
     {
       "path": "dependencies.json",
@@ -134,8 +134,8 @@
     },
     {
       "path": "dev/drop-preview/kirin-ui/instruments/entry.jsx",
-      "bytes": 1914,
-      "sha256": "3fd9f7efe400f3fa9ca47c944153666f1b6603981d667103a4e163b0d1daabbc"
+      "bytes": 2590,
+      "sha256": "1dcc804a493201240fe98d3353c176cc102639b2574fdc380919166c52ebda08"
     },
     {
       "path": "dev/drop-preview/kirin-ui/instruments/host-hooks.mjs",
@@ -149,8 +149,8 @@
     },
     {
       "path": "dev/drop-preview/kirin-ui/instruments/instruments.mjs",
-      "bytes": 157945,
-      "sha256": "8501c935af0513326f8ead8205d18f3b612293ffb146dd6d442bc74e64bdf248"
+      "bytes": 158603,
+      "sha256": "8c78f9da0375453f7c18dffc80bb799dd0220ab8f96d7d33b6d47668202e10fa"
     },
     {
       "path": "dev/drop-preview/kirin-ui/instruments/kirinEyeModel.js",
@@ -174,8 +174,8 @@
     },
     {
       "path": "dev/drop-preview/kirin-ui/instruments/source.json",
-      "bytes": 3191,
-      "sha256": "9115cb6933dd5fbbadb474aacbc3e5337ea9f08af14dc91c84a04d19eb23aef1"
+      "bytes": 3270,
+      "sha256": "34e568babacee1aaea67e275c6d7ba9e1dac06f3145918bbe2295e3d156056fa"
     },
     {
       "path": "dev/drop-preview/kirin-ui/normalStone.css",
@@ -184,8 +184,8 @@
     },
     {
       "path": "dev/drop-preview/kirin-ui/presentation.mjs",
-      "bytes": 6255,
-      "sha256": "33060d574c3f3e7d85b9b93e43937ec4928a12f0100acad6589cd7a81f0b2e74"
+      "bytes": 6303,
+      "sha256": "e65de59138d360d41814601c4fb8455be9dea70ba92f5d308f5012d6b4b990c0"
     },
     {
       "path": "dev/drop-preview/kirin-ui/source.json",
@@ -201,6 +201,11 @@
       "path": "dev/drop-preview/kirin-ui/stonePointer.mjs",
       "bytes": 4734,
       "sha256": "8a1a8fc370a439cb056d6c41c402c00c76aa5d1144e026c15ee2ebd593737730"
+    },
+    {
+      "path": "dev/drop-preview/locale.mjs",
+      "bytes": 162,
+      "sha256": "0cbf67e1322906165222f5bd17088d5b162c75e8f4df92f36cdcbd467344e8c5"
     },
     {
       "path": "dev/drop-preview/loudness.mjs",
@@ -234,8 +239,8 @@
     },
     {
       "path": "dev/drop-preview/psycho-view.mjs",
-      "bytes": 6727,
-      "sha256": "e3d5f901056abece33cf73a117b08af470f47975aa2b715cb833391fa9094cd7"
+      "bytes": 7233,
+      "sha256": "7939532a0ccac4e35f812dfc14d63b3f9e2f09e8f849c9a0187d8188acaf3f91"
     },
     {
       "path": "dev/drop-preview/wasm-core.mjs",
@@ -246,6 +251,36 @@
       "path": "dev/drop-preview/worker.mjs",
       "bytes": 260,
       "sha256": "120b455246ece836ebc6b004240228bab26aac2a3da0691d8479c0026a32d86f"
+    },
+    {
+      "path": "dev/drop-public/analyze.mjs",
+      "bytes": 1217,
+      "sha256": "e591796875cb7503b80e4aae8de7273045c9eb30bb649d172a48664c1784dcc5"
+    },
+    {
+      "path": "dev/drop-public/page.mjs",
+      "bytes": 19320,
+      "sha256": "a40a3c7f62cc49de486f813a927a4f8e5a92c3e17b95c58d03408d853d01a130"
+    },
+    {
+      "path": "dev/drop-public/policy.mjs",
+      "bytes": 649,
+      "sha256": "c7007dc07a5136baa75409671cb0a821cc138e0124ba7a2cc24ab76b56a49447"
+    },
+    {
+      "path": "dev/drop-public/public.css",
+      "bytes": 1792,
+      "sha256": "69502a307b3c2917a7310add7253f31eacf8b7f1189abd33ebd58722fd334e4d"
+    },
+    {
+      "path": "dev/drop-public/public.mjs",
+      "bytes": 13790,
+      "sha256": "07df29958ea80fcc18831d5367f0b5f735d67ce4a0d12db2814533618a3462aa"
+    },
+    {
+      "path": "dev/drop-public/worker.mjs",
+      "bytes": 348,
+      "sha256": "6cf972262821b159ccb8c42abe6659aeeadd1820b59d45f1b49c6038ee46eafe"
     },
     {
       "path": "dev/measurement-core/Cargo.lock",
@@ -394,8 +429,13 @@
     },
     {
       "path": "scripts/build-drop-instruments.mjs",
-      "bytes": 12053,
-      "sha256": "00529edfdf5278bd820dd16cbdd03adc21fd5299b9f074c4979bf0aeb022f2fa"
+      "bytes": 13808,
+      "sha256": "6f5a0d80896e3cfc633c588acae079a88a45e11ab638a6a5b8fa26babab8c27e"
+    },
+    {
+      "path": "scripts/build-drop-public.mjs",
+      "bytes": 3463,
+      "sha256": "5b21f1f9755a4e0be88a4453fd2fb2d825bb93bd0fcb4325c310d62a8876b179"
     },
     {
       "path": "scripts/kirin-presentation-source.mjs",

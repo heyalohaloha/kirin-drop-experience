@@ -112,6 +112,24 @@ async function compileBundle(dependencyRoot) {
   const output = build.outputFiles[0].contents;
   return { output, dependencies };
 }
+// Refresh reviewed HP copy/locale adapters without reading the private product.
+// The pinned five generated display files must retain their original hashes.
+export async function refreshInstrumentHost(dependencyRoot) {
+  const receipt = JSON.parse(await readFile(path.join(directory,'source.json'),'utf8'));
+  if (receipt.sourceCommit !== sourceCommit || receipt.scope !== 'presentation-only' || receipt.measurementEngineIncluded !== false || receipt.approvedBy !== 'Daisuke' || receipt.approvedOn !== '2026-10-09') throw new Error('Invalid instrument boundary');
+  for (const item of receipt.files.filter(file=>file.path !== 'instruments.mjs')) {
+    const bytes = await readFile(path.join(directory,item.path));
+    if (bytes.length !== item.bytes || hash(bytes) !== item.sha256) throw new Error('Pinned display file changed: '+item.path);
+  }
+  const {output,dependencies} = await compileBundle(dependencyRoot);
+  if (JSON.stringify(dependencies) !== JSON.stringify(receipt.dependencies)) throw new Error('Instrument dependencies changed');
+  receipt.hostFiles = await Promise.all(hostFiles.map(async name=>{const bytes=await readFile(path.join(directory,name));return {path:name,bytes:bytes.length,sha256:hash(bytes)};}));
+  receipt.files = receipt.files.map(file=>file.path==='instruments.mjs'?{path:file.path,bytes:output.length,sha256:hash(output)}:file);
+  receipt.adaptations.push('Bilingual HP copy in the host entry; pinned OS JSX/SVG/models unchanged');
+  await writeFile(path.join(directory,'instruments.mjs'),output);
+  await writeFile(path.join(directory,'source.json'),JSON.stringify(receipt,null,2)+'\n');
+  return verifyInstruments();
+}
 export async function rebuildInstruments(dependencyRoot) {
   await verifyInstruments();
   const receipt = JSON.parse(await readFile(path.join(directory, 'source.json'), 'utf8'));
@@ -123,5 +141,5 @@ export async function rebuildInstruments(dependencyRoot) {
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const sourceAt = process.argv.indexOf('--source'), depsAt = process.argv.indexOf('--dependency-root');
   const repository = sourceAt < 0 ? undefined : process.argv[sourceAt + 1];
-  console.log(JSON.stringify(process.argv.includes('--build') ? await buildInstruments(repository, process.argv[depsAt + 1]) : process.argv.includes('--rebuild') ? await rebuildInstruments(process.argv[depsAt + 1]) : await verifyInstruments(repository), null, 2));
+  console.log(JSON.stringify(process.argv.includes('--build') ? await buildInstruments(repository, process.argv[depsAt + 1]) : process.argv.includes('--refresh-host') ? await refreshInstrumentHost(process.argv[depsAt + 1]) : process.argv.includes('--rebuild') ? await rebuildInstruments(process.argv[depsAt + 1]) : await verifyInstruments(repository), null, 2));
 }

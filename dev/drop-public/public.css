@@ -1,0 +1,22 @@
+.topbar nav { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 12px; }
+.topbar nav a { text-underline-offset: 4px; min-height: 44px; display: inline-flex; align-items: center; }
+.preview-label { margin-bottom: 12px; }
+.intro { align-items: start; }
+.intro-copy { max-width: 48em; font-size: 14px; }
+.scope-note { max-width: 58em; margin: 18px 0; font-size: 12px; color: var(--body); }
+.example-sheet { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; margin: 22px 0; }
+.example-sheet > div { min-width: 0; padding: 18px; border-radius: 12px; box-shadow: var(--stone-well); background: var(--stone); }
+.example-sheet strong { display: block; font: 26px var(--font-display); margin: 10px 0; }
+.example-sheet label { font-size: 11px; color: var(--body); }
+.example-sheet input { width: 100%; margin-top: 8px; }
+.motion-control { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 12px; }
+/* Outrank the shared instrument's important animation rules without editing
+   the pinned product display. This also covers instruments mounted later. */
+body[data-kirin-stone][data-motion="still"] :is(*, [data-kirin-eye-open="true"] [data-kirin-eye-spark]),
+body[data-kirin-stone][data-motion="still"] *::before,
+body[data-kirin-stone][data-motion="still"] *::after { animation: none !important; transition: none !important; }
+.measurement-detail { margin-top: 18px; }
+.public-links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 18px; }
+.public-links a { padding: 10px 0; text-underline-offset: 4px; }
+html[lang="en"] :is(h2,h3,.lead) { word-break: normal; overflow-wrap: normal; }
+@media (max-width:660px) { .example-sheet {grid-template-columns: repeat(2,minmax(0,1fr));} .example-sheet > div {padding: 14px;} }

@@ -1,3 +1,4 @@
+import {text as t} from './locale.mjs';
 const $ = (id) => document.getElementById(id);
 const number = (value) => Number.isFinite(value) ? value.toFixed(2) : "—";
 const node = (tag, text) => { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; return n; };
@@ -5,7 +6,7 @@ const svgNode = (tag, attrs) => { const n = document.createElementNS("http://www
 const label = (band) => `${(band * 1.2).toFixed(1)}–${((band + 1) * 1.2).toFixed(1)}`;
 let result, seconds = 0, selectedBand = 0, seek;
 export function createPsychoAuditionButton(position, seekTo) {
-  const button = node("button", `${position.toFixed(1)}秒を聴き直す`);
+  const button = node("button", t(`${position.toFixed(1)}秒を聴き直す`, `Listen again at ${position.toFixed(1)} s`));
   button.type = "button"; button.className = "time-button";
   button.addEventListener("click", () => seekTo(position));
   return button;
@@ -28,7 +29,7 @@ function drawBark() {
     const t = svgNode("text", { x, y: 144, fill: "#625b50", "font-size": 10 }); t.textContent = text; svg.append(t);
   }
   $("bark-plot").replaceChildren(svg);
-  $("bark-current").textContent = `${$("bark-position").value === "mean" ? "全曲の平均" : "再生位置までの最新値"} · ${label(selectedBand)} Bark · ${number(values[selectedBand])} sone/Bark · PSB ${number(current?.psb?.[selectedBand])}`;
+  $("bark-current").textContent = `${$("bark-position").value === "mean" ? t("全曲の平均","Whole-track mean") : t("再生位置までの最新値","Latest observation at playback position")} · ${label(selectedBand)} Bark · ${number(values[selectedBand])} sone/Bark · PSB ${number(current?.psb?.[selectedBand])}`;
   $("bark-values").replaceChildren(...values.map((value, band) => {
     const row = node("tr"); row.append(node("th", label(band)), node("td", number(value)), node("td", number(current?.psb?.[band]))); return row;
   }));
@@ -49,7 +50,7 @@ function drawCurve() {
   svg.append(svgNode("path", { d: path, fill: "none", stroke: "#526f78", "stroke-width": 1.5 }));
   svg.append(svgNode("path", { id: "psycho-cursor", d: "M0 0V132", stroke: "#302d28", "stroke-width": 1 }));
   $("psycho-plot").replaceChildren(svg);
-  $("psycho-plot").setAttribute("aria-label", key === "sharpness" ? "Sharpnessの時間変化、単位acum" : "Zwicker Loudnessの時間変化、単位sone");
+  $("psycho-plot").setAttribute("aria-label", key === "sharpness" ? t("Sharpnessの時間変化、単位acum","Sharpness over time in acum") : t("Zwicker Loudnessの時間変化、単位sone","Zwicker Loudness over time in sone"));
   psychoPosition(seconds);
 }
 export function resetPsycho() {
@@ -64,16 +65,16 @@ export function psychoPosition(position) {
   if (!result?.psycho.timeline.length) return;
   $("psycho-cursor")?.setAttribute("transform", `translate(${36 + position / result.duration * 802} 0)`);
   const row = result.psycho.timeline.findLast((row) => row.time <= position);
-  $("psycho-current").textContent = `再生位置 ${position.toFixed(1)}秒 · ${row ? "観測時刻 " + row.time.toFixed(3) + "秒" : "観測前"} · ${number(row?.loudness)} sone / ${number(row?.sharpness)} acum`;
+  $("psycho-current").textContent = `${t("再生位置","Playback position")} ${position.toFixed(1)} s · ${row ? t("観測時刻","Observation at") + " " + row.time.toFixed(3) + " s" : t("観測前","Before first observation")} · ${number(row?.loudness)} sone / ${number(row?.sharpness)} acum`;
   if ($("bark-position").value === "position") drawBark();
 }
 export function renderPsycho(measurement) {
   result = measurement;
   $("psycho-results").hidden = false;
-  if (result.psycho.state !== "measured") { $("psycho-state").textContent = "心理音響の計算を完了できませんでした。波形や他の結果は引き続き確認できます。"; return; }
+  if (result.psycho.state !== "measured") { $("psycho-state").textContent = t("心理音響の計算を完了できませんでした。波形や他の結果は引き続き確認できます。","Psychoacoustic measurements could not complete. Waveform and other results remain available."); return; }
   const p = result.psycho;
   $("sone").textContent = number(p.loudness); $("sharpness").textContent = number(p.sharpness);
-  $("psycho-state").textContent = `Hypha公開コア · 元音源${result.sampleRate / 1000} kHz → 心理音響用48 kHz · 左右を別々に測って平均 · 仮定0 dBFS ≈ ${p.assumedFullScaleSPL.toFixed(2)} dB SPL · 自由音場`;
+  $("psycho-state").textContent = `${t("Hypha公開コア","Hypha public core")} · ${result.sampleRate / 1000} kHz → 48 kHz · ${t("左右を別々に測って平均","Independent channel measurements, averaged")} · ${t("仮定","Assumption")} 0 dBFS ≈ ${p.assumedFullScaleSPL.toFixed(2)} dB SPL · ${t("自由音場","Free field")}`;
   // Three measured local changes as audition entry points, never a quality ranking.
   const changes = p.timeline.slice(1).map((row, i) => ({ row, change: Math.abs(row.sharpness - p.timeline[i].sharpness) })).sort((a, b) => b.change - a.change);
   const positions = [];

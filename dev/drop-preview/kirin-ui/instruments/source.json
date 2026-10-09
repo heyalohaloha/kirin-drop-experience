@@ -30,8 +30,8 @@
   "hostFiles": [
     {
       "path": "entry.jsx",
-      "bytes": 1914,
-      "sha256": "3fd9f7efe400f3fa9ca47c944153666f1b6603981d667103a4e163b0d1daabbc"
+      "bytes": 2590,
+      "sha256": "1dcc804a493201240fe98d3353c176cc102639b2574fdc380919166c52ebda08"
     },
     {
       "path": "host-hooks.mjs",
@@ -77,8 +77,8 @@
     },
     {
       "path": "instruments.mjs",
-      "bytes": 157945,
-      "sha256": "8501c935af0513326f8ead8205d18f3b612293ffb146dd6d442bc74e64bdf248"
+      "bytes": 158603,
+      "sha256": "8c78f9da0375453f7c18dffc80bb799dd0220ab8f96d7d33b6d47668202e10fa"
     }
   ],
   "dependencies": [
@@ -104,6 +104,7 @@
     "HP stone-light and translation adapters only",
     "Normal-mode VU only; session preference, no persistent storage",
     "SVG glow filters removed to meet HP dynamic-filter standard",
-    "Exact JSX/SVG, scale, sensitivity, needle and pupil motion retained; reduced-motion exceptions retained"
+    "Exact JSX/SVG, scale, sensitivity, needle and pupil motion retained; reduced-motion exceptions retained",
+    "Bilingual HP copy in the host entry; pinned OS JSX/SVG/models unchanged"
   ]
 }

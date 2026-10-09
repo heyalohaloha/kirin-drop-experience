@@ -2,6 +2,10 @@
 
 This package contains the two public measurement wrappers, their pinned public
 dependencies, the development experience frontend and reproducible build recipes.
+It also contains the bounded bilingual website candidate in `dev/drop-public`:
+original WAV measurement at 44.1/48/96 kHz, no longer than 90 seconds and 32 MiB.
+Its active graph excludes the historical beat/chord estimator. The song-sheet
+example is explanatory data, not analysis of the listener's uploaded WAV.
 Daisuke approved publishing this limited Drop code under GPLv3 on 2026-10-09.
 The combined experience is GPL-3.0-only; see `LICENSE` and `NOTICES.md` for the
 MIT wrapper and original third-party licences.
@@ -86,3 +90,9 @@ Known remaining checks include the 8 kHz abrupt-tail True Peak reference differe
 candidate quality on real music, Safari/iPhone, reduced-motion and production
 integration. Beat/chord outputs remain uncalibrated candidates, never confirmed
 scores or an actual STAGE/QR connection. Private OS calculations are not supplied.
+The bounded website candidate rejects those unaccepted 8/192 kHz inputs; it does
+not fix or silently waive the historical criteria. Manual motion suppression and
+Chrome desktop/mobile-size checks belong to the HP acceptance record, not an
+assurance for Safari or physical iPhones. `scripts/build-drop-public.mjs` assembles
+only the reviewed static graph; the separately licensed website fonts must be
+supplied by the HP checkout, and are deliberately absent from this source package.
