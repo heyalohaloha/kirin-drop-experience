@@ -18,5 +18,12 @@ body[data-kirin-stone][data-motion="still"] *::after { animation: none !importan
 .measurement-detail { margin-top: 18px; }
 .public-links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 18px; }
 .public-links a { padding: 10px 0; text-underline-offset: 4px; }
+body[data-embedded="true"] { margin:0; padding:0; }
+body[data-embedded="true"] main { width:100%; max-width:none; margin:0; padding:24px; }
+body[data-embedded="true"] .topbar { justify-content:flex-end; padding:0 24px; border:0; }
+body[data-embedded="true"] :is(.topbar .wordmark,.topbar nav>a,.intro,footer) { display:none; }
+body[data-embedded="true"][data-input-state="idle"] :is(.read-area,.next-section),
+body[data-embedded="true"][data-input-state="error"] :is(.read-area,.next-section),
+body[data-embedded="true"][data-input-state="measuring"] .next-section { display:none; }
 html[lang="en"] :is(h2,h3,.lead) { word-break: normal; overflow-wrap: normal; }
 @media (max-width:660px) { .example-sheet {grid-template-columns: repeat(2,minmax(0,1fr));} .example-sheet > div {padding: 14px;} }

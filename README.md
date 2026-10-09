@@ -3,7 +3,10 @@
 This package contains the two public measurement wrappers, their pinned public
 dependencies, the development experience frontend and reproducible build recipes.
 It also contains the bounded bilingual website candidate in `dev/drop-public`:
-original WAV measurement at 44.1/48/96 kHz, no longer than 90 seconds and 32 MiB.
+original WAV measurement at 44.1/48/96 kHz, no longer than five minutes, without
+an arbitrary file-size limit. Files are inspected in the Worker before reading
+the whole audio. The OS product page embeds the same experience in a trusted
+same-origin document; standalone routes retain their DENY/CSP policy.
 Its active graph excludes the historical beat/chord estimator. The song-sheet
 example is explanatory data, not analysis of the listener's uploaded WAV.
 Daisuke approved publishing this limited Drop code under GPLv3 on 2026-10-09.

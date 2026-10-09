@@ -1,10 +1,10 @@
 import { measureWav } from '../drop-preview/measure.mjs';
 import { loadCommonCores, measureCommonLevel, measureCommonPsycho } from '../drop-preview/wasm-core.mjs';
-import { validatePublicInput } from './policy.mjs';
+import { validatePublicInput, PUBLIC_DECODE } from './policy.mjs';
 export async function analyzePublicWav(buffer, progress = () => {}, readBytes) {
   const audio = validatePublicInput(buffer);
   progress({phase: 'signal'});
-  const result = measureWav(buffer);
+  const result = measureWav(buffer, PUBLIC_DECODE);
   result.loudness = {state: 'unavailable', integrated: null, lra: null, timeline: []};
   result.truePeak = {state: 'unavailable', db: null, timeline: []};
   result.psycho = {state: 'unavailable', timeline: []};

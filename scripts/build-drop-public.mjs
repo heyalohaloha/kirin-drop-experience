@@ -2,18 +2,20 @@ import {copyFile,lstat,mkdir,readFile,realpath,writeFile} from 'node:fs/promises
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {renderDropPage} from '../dev/drop-public/page.mjs';
+import {renderOsDropDocument} from '../dev/drop-public/embed.mjs';
 import {verifyPresentation} from './kirin-presentation-source.mjs';
 import {verifyInstruments} from './build-drop-instruments.mjs';
 const root = path.resolve(import.meta.dirname,'..');
 export const dropRuntimeFiles = Object.freeze([
   ...['preview.css','measure.mjs','wasm-core.mjs','psycho-view.mjs','locale.mjs','playback.mjs','level-core.wasm','psycho-core.wasm'].map(name=>({source:'dev/drop-preview/'+name,target:'assets/drop/'+name})),
   ...['normalStone.css','dropMotion.css','dropPlay.css','host.css','presentation.mjs','dropStyles.mjs','dropRipple.mjs','stoneLight.mjs','stonePointer.mjs','instruments/instruments.css','instruments/instruments.mjs'].map(name=>({source:'dev/drop-preview/kirin-ui/'+name,target:'assets/drop/kirin-ui/'+name})),
-  ...['public.mjs','worker.mjs','analyze.mjs','policy.mjs','public.css'].map(name=>({source:'dev/drop-public/'+name,target:'assets/drop/'+name})),
+  ...['public.mjs','worker.mjs','analyze.mjs','policy.mjs','public.css','embed-host.mjs'].map(name=>({source:'dev/drop-public/'+name,target:'assets/drop/'+name})),
   ...['inter-latin-wght-400-600.woff2','jetbrains-mono-latin-wght-400-600.woff2'].map(name=>({source:'fonts/'+name,target:'fonts/'+name})),
 ]);
-export const dropPublicPaths = Object.freeze([...dropRuntimeFiles.map(f=>f.target),'os/drop.html','ja/os/drop.html']);
+export const dropPublicPaths = Object.freeze([...dropRuntimeFiles.map(f=>f.target),'os/drop.html','ja/os/drop.html','os/experience.html','ja/os/experience.html']);
 export const dropAddedPaths = Object.freeze(dropPublicPaths.filter(file=>!file.startsWith('fonts/')));
 export const dropCsp = "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src blob:; worker-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'";
+export const dropEmbedCsp = dropCsp.replace("frame-ancestors 'none'","frame-ancestors 'self'");
 export async function buildDropPublic(outputRoot) {
   await verifyPresentation(); await verifyInstruments();
   const receipt = JSON.parse(await readFile(path.join(root,'dev/drop-preview/core-build.json'),'utf8'));
@@ -37,6 +39,8 @@ export async function buildDropPublic(outputRoot) {
   for (const language of ['ja','en']) {
     const file = (language==='ja'?'ja/':'')+'os/drop.html'; await mkdir(path.dirname(path.join(outputRoot,file)),{recursive:true});
     await writeFile(path.join(outputRoot,file),renderDropPage(language)); files.push(file);
+    const embedded=(language==='ja'?'ja/':'')+'os/experience.html';
+    await writeFile(path.join(outputRoot,embedded),renderOsDropDocument(language)); files.push(embedded);
   }
   return files;
 }

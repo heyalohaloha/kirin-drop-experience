@@ -1,5 +1,4 @@
 import {createDemoWav} from '../drop-preview/measure.mjs';
-import {PUBLIC_LIMITS} from './policy.mjs';
 import {text as t} from '../drop-preview/locale.mjs';
 import {initialisePresentation, installFileDrop} from '../drop-preview/kirin-ui/presentation.mjs';
 import {createPlaybackTicker} from '../drop-preview/playback.mjs';
@@ -17,6 +16,7 @@ const time = v => `${Math.floor(v / 60)}:${(v % 60).toFixed(1).padStart(4,'0')}`
 const instrumentNote = $('instrument-note').textContent;
 function state(value) {
   $('desk').dataset.inputState = value;
+  document.body.dataset.inputState = value;
   $('input-state').textContent = {idle:'WAITING',measuring:'MEASURING',ready:'READY',error:'CHECK INPUT'}[value];
   $('read-area').setAttribute('aria-busy',String(value === 'measuring'));
 }
@@ -68,19 +68,16 @@ function loudness(r) {
   $('loudness-plot').replaceChildren(svg);
 }
 const errors = {
-  'public-size': () => t('32 MiB以下のWAVを選んでください。','Choose a WAV no larger than 32 MiB.'),
   'public-rate': () => t('この体験版は44.1／48／96 kHzのWAVに対応しています。','This experience supports 44.1, 48, and 96 kHz WAV files.'),
-  'public-duration': () => t('90秒以内のWAVを選んでください。','Choose a WAV no longer than 90 seconds.'),
+  'public-duration': () => t('5分以内のWAVを選んでください。','Choose a WAV no longer than 5 minutes.'),
   'invalid-wav': () => t('対応するPCM／IEEE float WAVを読み込めませんでした。形式と条件を確認してください。','Could not read a supported PCM or IEEE float WAV. Check the format and limits.'),
 };
 async function load(file,demo = false) {
   const token = ++generation; stop(); fileDrop.reset(); $('audio-file').value = '';
   $('results').hidden = true; $('empty').hidden = false; $('clear').disabled = false;
   $('file-name').textContent = demo ? t('DEMO · 合成音源','DEMO · Synthetic audio') : file.name;
-  if (file.size > PUBLIC_LIMITS.bytes) {state('error'); $('status').textContent = errors['public-size'](); return;}
   state('measuring'); $('status').textContent = t('端末内で音源を測定しています。','Measuring audio on your device.');
   try {
-    const buffer = await file.arrayBuffer(); if (token !== generation) return;
     worker = new Worker(new URL('./worker.mjs',import.meta.url),{type:'module'});
     worker.onmessage = ({data}) => {
       if (token !== generation) return;
@@ -105,7 +102,7 @@ async function load(file,demo = false) {
       $('status').textContent = demo ? t('12秒の合成デモを測定しました。再生を押して聴けます。','Measured the 12-second synthetic demo. Press Play to listen.') : t('測定が終わりました。音源を外部へ送信していません。','Measurement complete. No audio was uploaded.');
     };
     worker.onerror = () => {if(token===generation) {worker?.terminate(); worker=undefined; state('error'); $('status').textContent=t('測定を開始できませんでした。ページを再読み込みして試してください。','Could not start measurement. Reload the page to try again.');}};
-    worker.postMessage(buffer,[buffer]);
+    worker.postMessage(file);
   } catch {if(token===generation){state('error');$('status').textContent=errors['invalid-wav']();}}
 }
 function updatePosition() {
@@ -147,3 +144,9 @@ $('motion-off').addEventListener('change',event=>{document.body.dataset.motion=e
 initialisePsycho(seekTo);
 window.addEventListener('pagehide',event=>{clear();presentation.suspend();if(!event.persisted){fileDrop.dispose();presentation.dispose();}});
 window.addEventListener('pageshow',event=>{if(event.persisted&&!$('motion-off').checked)presentation.resume();});
+if(document.body.dataset.embedded === 'true') {
+  let lastHeight=0;
+  const report=()=>{const height=Math.ceil(document.body.scrollHeight);if(height!==lastHeight){lastHeight=height;parent.postMessage({type:'kirin-drop-height',height},location.origin);}};
+  new ResizeObserver(report).observe(document.body);
+  document.fonts.ready.then(report);
+}

@@ -4,9 +4,9 @@ const fail = (message) => { throw new Error(message); };
 const db = (value) => value === 0 ? null : 20 * Math.log10(value);
 const tag = (view, offset) => String.fromCharCode(...Array.from({ length: 4 }, (_, i) => view.getUint8(offset + i)));
 
-export function decodeWav(buffer) {
+export function decodeWav(buffer, {bytes = LIMITS.bytes, seconds = LIMITS.seconds} = {}) {
   if (!(buffer instanceof ArrayBuffer) || buffer.byteLength < 44) fail("WAVの内容を確認できません。別のファイルを選んでください。");
-  if (buffer.byteLength > LIMITS.bytes) fail("このプレビューでは64 MiB以下の音源を選んでください。");
+  if (buffer.byteLength > bytes) fail("このプレビューでは64 MiB以下の音源を選んでください。");
   const view = new DataView(buffer);
   if (tag(view, 0) !== "RIFF" || tag(view, 8) !== "WAVE") fail("現在はRIFF形式のWAVに対応しています。MP3・AIFF・RF64などは未対応です。");
   const end = view.getUint32(4, true) + 8;
@@ -33,7 +33,7 @@ export function decodeWav(buffer) {
   if (align !== channels * bytesPerSample || byteRate !== sampleRate * align || data.size % align !== 0) fail("WAVのチャンネル・サイズ情報が一致しません。");
   const frames = data.size / align, duration = frames / sampleRate;
   if (frames === 0) fail("音声データが空です。");
-  if (duration > LIMITS.seconds) fail("このプレビューでは10分以内の音源を選んでください。");
+  if (duration > seconds) fail("このプレビューでは10分以内の音源を選んでください。");
   const read = (offset) => {
     if (code === 3) return bits === 32 ? view.getFloat32(offset, true) : view.getFloat64(offset, true);
     if (bits === 8) return (view.getUint8(offset) - 128) / 128;
@@ -46,8 +46,8 @@ export function decodeWav(buffer) {
   return { sampleRate, channels, bits, code, frames, duration, readSample: (channel, frame) => read(data.start + frame * align + channel * bytesPerSample) };
 }
 
-export function measureWav(buffer) {
-  const { sampleRate, channels, bits, code, frames, duration, readSample } = decodeWav(buffer);
+export function measureWav(buffer, options) {
+  const { sampleRate, channels, bits, code, frames, duration, readSample } = decodeWav(buffer, options);
   const sums = Array(channels).fill(0), peaks = Array(channels).fill(0);
   const wave = Array.from({ length: channels }, () => Array.from({ length: Math.min(420, frames) }, () => [Infinity, -Infinity]));
   const windowFrames = Math.max(1, Math.round(sampleRate * .1));
