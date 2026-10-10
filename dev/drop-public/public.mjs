@@ -4,7 +4,7 @@ import {initialisePresentation, installFileDrop} from '../drop-preview/kirin-ui/
 import {createPlaybackTicker} from '../drop-preview/playback.mjs';
 import {initialisePsycho, renderPsycho, resetPsycho, psychoPosition} from '../drop-preview/psycho-view.mjs';
 const $ = id => document.getElementById(id);
-const presentation = initialisePresentation({formatLight: light => t(
+const presentation = initialisePresentation({lightIntensity: .3, formatLight: light => t(
   `${light.term[0]} · ${light.night > .5 ? '月明かり' : '太陽の光'}`,
   `${light.term[2]} · ${light.night > .5 ? 'Moonlight' : 'Sunlight'}`)});
 const player = new Audio(); player.preload = 'metadata';

@@ -42,8 +42,24 @@ export function applyLiteralStyle(element, name) {
   for (const [property, value] of Object.entries(dropStyles[name])) element.style[property] = typeof value === "number" && value !== 0 && !UNITLESS.has(property) ? `${value}px` : String(value);
 }
 
+// Owner-selected HP appearance strength. The original OS snapshot stays intact;
+// measurement, instrument colors and the sun/shadow geometry are not scaled.
+export function scaleStoneAppearance(vars, intensity = 1) {
+  if (!Number.isFinite(intensity) || intensity < 0 || intensity > 1) throw new RangeError("Stone intensity must be between 0 and 1");
+  const scaled = {...vars};
+  if (intensity === 1) return scaled;
+  for (const [name, neutral] of Object.entries({"--stone": "oklch(.945 .008 82)", "--stone-lit": "oklch(.975 .006 85)", "--stone-deep": "oklch(.905 .011 78)"})) {
+    if (Object.hasOwn(vars, name)) scaled[name] = `color-mix(in oklab, ${neutral} ${(1 - intensity) * 100}%, ${vars[name]} ${intensity * 100}%)`;
+  }
+  for (const [name, neutral] of Object.entries({"--hl": [255,252,246], "--sh": [84,66,46]})) {
+    if (Object.hasOwn(vars, name)) scaled[name] = vars[name].split(' ').map((value, i) => Math.round(neutral[i] + intensity * (Number(value) - neutral[i]))).join(' ');
+  }
+  if (Object.hasOwn(vars, '--night')) scaled['--night'] = (Number(vars['--night']) * intensity).toFixed(3);
+  return scaled;
+}
+
 // The OS calculation/model boundary ends before this adapter: presentation only.
-export function initialisePresentation({formatLight = light => `${light.term[0]} · ${light.night > .5 ? "月明かり" : "太陽の光"}`} = {}) {
+export function initialisePresentation({lightIntensity = 1, formatLight = light => `${light.term[0]} · ${light.night > .5 ? "月明かり" : "太陽の光"}`} = {}) {
   const body = document.body, basin = document.querySelector("[data-stone-basin]");
   const touch = document.getElementById("basin-touch"), brand = document.querySelector("[data-drop-brand]");
   const ripples = document.querySelector("[data-drop-ripples]");
@@ -62,7 +78,7 @@ export function initialisePresentation({formatLight = light => `${light.term[0]}
     if (!active) return;
     const date = presentationDate(new Date(), new URLSearchParams(location.search).get("stoneHour"));
     const light = stoneLightAt(date);
-    for (const [name, value] of Object.entries(light.vars)) body.style.setProperty(name, value);
+    for (const [name, value] of Object.entries(scaleStoneAppearance(light.vars, lightIntensity))) body.style.setProperty(name, value);
     document.getElementById("light-label").textContent = formatLight(light);
     lightTimer = setTimeout(updateLight, 60000 - Date.now() % 60000 + 50);
   };

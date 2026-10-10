@@ -184,8 +184,8 @@
     },
     {
       "path": "dev/drop-preview/kirin-ui/presentation.mjs",
-      "bytes": 6303,
-      "sha256": "e65de59138d360d41814601c4fb8455be9dea70ba92f5d308f5012d6b4b990c0"
+      "bytes": 7488,
+      "sha256": "42363d421b86738cead10d5a611c90e9264175f4b4a60f7c2a83d770a8c19664"
     },
     {
       "path": "dev/drop-preview/kirin-ui/source.json",
@@ -269,8 +269,8 @@
     },
     {
       "path": "dev/drop-public/page.mjs",
-      "bytes": 19339,
-      "sha256": "fe2cdb941ee44333d9498a4fe600e3251002d398019b72973f9f977c469c73a8"
+      "bytes": 24003,
+      "sha256": "6c843a10d5ee85fcb9ac9d5d00423570bb92dced83fb99b7945f638ba74088ea"
     },
     {
       "path": "dev/drop-public/policy.mjs",
@@ -279,13 +279,13 @@
     },
     {
       "path": "dev/drop-public/public.css",
-      "bytes": 2375,
-      "sha256": "ce74b4ad8b725fb0903c5dcc9a73f15e7b5821279561028d84d1fe36596781d3"
+      "bytes": 3673,
+      "sha256": "cce10aa62631b03215f0d8a20ff31d71ee51e6ca7244615c06f5409454de9299"
     },
     {
       "path": "dev/drop-public/public.mjs",
-      "bytes": 13816,
-      "sha256": "d97772ac70d68472f8298757dda82606cae5e63aa6ca0598f82e24dc1d8fa6c2"
+      "bytes": 13836,
+      "sha256": "5868ea9e25b88b8de9d7cbf0a0760b4bb67bd1c85a39fabdc1561a7e49963dff"
     },
     {
       "path": "dev/drop-public/worker.mjs",

@@ -18,6 +18,20 @@ body[data-kirin-stone][data-motion="still"] *::after { animation: none !importan
 .measurement-detail { margin-top: 18px; }
 .public-links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 18px; }
 .public-links a { padding: 10px 0; text-underline-offset: 4px; }
+.next-head > p { max-width: 64em; }
+.next-head > p:not(.eyebrow) { font-size: 14px; }
+.next-head .path-scope-note { margin-top: 14px; font-size: 12px; }
+.paths { gap: 24px; }
+.paths article { min-width: 0; display: flex; flex-direction: column; padding: 22px; border: 0; border-radius: 20px; background: var(--stone); box-shadow: var(--stone-plate); }
+.path-image { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: center top; margin: 18px 0 14px; border-radius: 10px; box-shadow: var(--stone-well); }
+.paths h3 { font-family: var(--font-display); font-size: 25px; line-height: 1.4; margin: 10px 0 6px; overflow-wrap: normal; }
+.path-facts { margin: 0; }
+.path-facts dt { margin: 20px 0 8px; font-size: 14px; font-weight: 600; }
+.path-facts dd { margin: 0; color: var(--body); font-size: 14px; line-height: 1.9; overflow-wrap: break-word; }
+.path-tag { overflow-wrap: break-word; line-height: 1.8; padding-top: 20px; margin-top: auto; }
+.path-link { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
+.path-capture-note { margin-top: 22px; color: var(--body); font-size: 12px; line-height: 1.8; }
+.metrics .metric-meaning { margin: 10px 0 0; font: 12px/1.7 var(--font); color: var(--body); }
 body[data-embedded="true"] { margin:0; padding:0; }
 body[data-embedded="true"] main { width:100%; max-width:none; margin:0; padding:24px; }
 body[data-embedded="true"] .topbar { justify-content:flex-end; padding:0 24px; border:0; }
