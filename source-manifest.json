@@ -269,8 +269,8 @@
     },
     {
       "path": "dev/drop-public/page.mjs",
-      "bytes": 24003,
-      "sha256": "6c843a10d5ee85fcb9ac9d5d00423570bb92dced83fb99b7945f638ba74088ea"
+      "bytes": 24095,
+      "sha256": "1cc7655ac76e7cddf0dcae4891415d037a48f7d083b317491821081f40e90a74"
     },
     {
       "path": "dev/drop-public/policy.mjs",
